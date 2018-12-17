@@ -80,6 +80,7 @@ header > div {
   height: 800px;
   background-color: pink;
   display: none;
+  border-radius: 1em;
 }
 
 #message > p {

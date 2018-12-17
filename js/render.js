@@ -7,8 +7,9 @@ const updateScore = function () {
 }
 const endMessage = function () {
   if (!tic.gameInProgress) {
-    $("#game-board").toggle("slide");
-    $("#message").toggle("slide");
+    $(`<p>The winner is ${tic.winner}.</p>`).appendTo("#message");
+    $("#game-board").delay(1000).toggle(1000);
+    $("#message").delay(1000).toggle(1000);
   }
 }
 
@@ -18,7 +19,6 @@ $(document).ready(function () {
   // play///////////////////////////////////////////////////
   let player = player1;
   $(".column").on("click", function () {
-    endMessage();
     if ($(this).html().length === 0 && tic.gameInProgress) {
       const icon = $(player[0]);
       $(this).html(icon);
@@ -27,6 +27,7 @@ $(document).ready(function () {
       tic.update(tile, value);
       tic.result();
       updateScore();
+      endMessage();
       if (player === player1) {
         player = player2;
       } else if (player === player2) {
@@ -38,12 +39,11 @@ $(document).ready(function () {
   // reset game borad ////////////////////////////////////////
   $("#reset").on("click", function () {
     if (!tic.gameInProgress) {
-      $("#game-board").toggle("slide");
-      $("#message").toggle("slide");
+      $("#game-board").toggle("slow");
+      $("#message").toggle("slow");
     }
     $(".column").html("");
     tic.board = {11: 10, 12: 20, 13: 30, 21: 40, 22: 50, 23: 60, 31: 70, 32: 80, 33: 90};
     tic.gameInProgress = true;
-
   });
 });

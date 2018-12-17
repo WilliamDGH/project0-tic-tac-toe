@@ -19,6 +19,7 @@ const tic = {
     32: 80,
     33: 90,
   },
+  winner: "",
   score: {
     player1Score: 0,
     drawScore: 0,
@@ -35,14 +36,17 @@ const tic = {
     if (playedTiles === 9) {
       this.gameInProgress = false;
       this.score.drawScore ++;
+      this.winner = "draw";
     }
     if (this.board["11"] === this.board["12"] && this.board["12"] === this.board["13"]) {
       const winnerID = this.board["11"];
       this.gameInProgress = false;
       if (winnerID === 1) {
         this.score.player1Score ++;
+        this.winner = "player1";
       } else if (winnerID === 2) {
         this.score.player2Score ++;
+        this.winner = "player2";
       }
     }
     if (this.board["21"] === this.board["22"] && this.board["22"] === this.board["23"]) {
@@ -50,8 +54,10 @@ const tic = {
       this.gameInProgress = false;
       if (winnerID === 1) {
         this.score.player1Score ++;
+        this.winner = "player1";
       } else if (winnerID === 2) {
         this.score.player2Score ++;
+        this.winner = "player2";
       }
     }
     if (this.board["31"] === this.board["32"] && this.board["32"] === this.board["33"]) {
@@ -59,8 +65,10 @@ const tic = {
       this.gameInProgress = false;
       if (winnerID === 1) {
         this.score.player1Score ++;
+        this.winner = "player1";
       } else if (winnerID === 2) {
         this.score.player2Score ++;
+        this.winner = "player2";
       }
     }
     if (this.board["11"] === this.board["21"] && this.board["21"] === this.board["31"]) {
@@ -68,8 +76,10 @@ const tic = {
       this.gameInProgress = false;
       if (winnerID === 1) {
         this.score.player1Score ++;
+        this.winner = "player1";
       } else if (winnerID === 2) {
         this.score.player2Score ++;
+        this.winner = "player2";
       }
     }
     if (this.board["12"] === this.board["22"] && this.board["22"] === this.board["32"]) {
@@ -77,8 +87,10 @@ const tic = {
       this.gameInProgress = false;
       if (winnerID === 1) {
         this.score.player1Score ++;
+        this.winner = "player1";
       } else if (winnerID === 2) {
         this.score.player2Score ++;
+        this.winner = "player2";
       }
     }
     if (this.board["13"] === this.board["23"] && this.board["23"] === this.board["33"]) {
@@ -86,8 +98,10 @@ const tic = {
       this.gameInProgress = false;
       if (winnerID === 1) {
         this.score.player1Score ++;
+        this.winner = "player1";
       } else if (winnerID === 2) {
         this.score.player2Score ++;
+        this.winner = "player2";
       }
     }
     if (this.board["11"] === this.board["22"] && this.board["22"] === this.board["33"]) {
@@ -95,8 +109,10 @@ const tic = {
       this.gameInProgress = false;
       if (winnerID === 1) {
         this.score.player1Score ++;
+        this.winner = "player1";
       } else if (winnerID === 2) {
         this.score.player2Score ++;
+        this.winner = "player2";
       }
     }
     if (this.board["13"] === this.board["22"] && this.board["22"] === this.board["31"]) {
@@ -104,8 +120,10 @@ const tic = {
       this.gameInProgress = false;
       if (winnerID === 1) {
         this.score.player1Score ++;
+        this.winner = "player1";
       } else if (winnerID === 2) {
         this.score.player2Score ++;
+        this.winner = "player2";
       }
      }
   },
