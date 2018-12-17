@@ -10,11 +10,27 @@
   crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/logic.js"></script>
   <script type="text/javascript" src="js/render.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
   <title>Tic Tac Toe</title>
 </head>
 <body>
   <h1>Tic Tac Toe</h1>
+  <header>
+    <div id="player1">
+      Player1
+      <p>Score: <span id="player1-score"></span></p>
+    </div>
+    <div id="draw">
+      Draw
+      <p>Score: <span id="draw-score"></span></p>
+    </div>
+    <div id="player2">
+      Player2
+      <p>Score: <span id="player2-score"></span></p>
+    </div>
+  </header>
+
   <div id="game-board">
     <div class="row">
       <div class="column" id="11" ></div>
@@ -33,5 +49,7 @@
     </div>
   </div>
 
+  <div id="message">Game Over</div>
+  <button type="button" name="reset" id="reset">Restart</button>
 </body>
 </html>

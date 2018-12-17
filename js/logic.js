@@ -19,34 +19,108 @@ const tic = {
     32: 80,
     33: 90,
   },
+  score: {
+    player1Score: 0,
+    drawScore: 0,
+    player2Score: 0,
+  },
+  gameInProgress: true,
   result: function () {
+    let playedTiles = 0;
+    for (let key in this.board) {
+      if (this.board[key].toString().length === 1) {
+        playedTiles ++;
+      }
+    }
+    if (playedTiles === 9) {
+      this.gameInProgress = false;
+      this.score.drawScore ++;
+    }
     if (this.board["11"] === this.board["12"] && this.board["12"] === this.board["13"]) {
-      return this.board["11"] + "wins";
+      const winnerID = this.board["11"];
+      this.gameInProgress = false;
+      if (winnerID === 1) {
+        this.score.player1Score ++;
+      } else if (winnerID === 2) {
+        this.score.player2Score ++;
+      }
     }
     if (this.board["21"] === this.board["22"] && this.board["22"] === this.board["23"]) {
-      return this.board["21"] + "wins";
+      const winnerID = this.board["21"];
+      this.gameInProgress = false;
+      if (winnerID === 1) {
+        this.score.player1Score ++;
+      } else if (winnerID === 2) {
+        this.score.player2Score ++;
+      }
     }
     if (this.board["31"] === this.board["32"] && this.board["32"] === this.board["33"]) {
-      return this.board["31"] + "wins";
+      const winnerID = this.board["31"];
+      this.gameInProgress = false;
+      if (winnerID === 1) {
+        this.score.player1Score ++;
+      } else if (winnerID === 2) {
+        this.score.player2Score ++;
+      }
     }
     if (this.board["11"] === this.board["21"] && this.board["21"] === this.board["31"]) {
-      return this.board["11"] + "wins";
+      const winnerID = this.board["11"];
+      this.gameInProgress = false;
+      if (winnerID === 1) {
+        this.score.player1Score ++;
+      } else if (winnerID === 2) {
+        this.score.player2Score ++;
+      }
     }
     if (this.board["12"] === this.board["22"] && this.board["22"] === this.board["32"]) {
-      return this.board["12"] + "wins";
+      const winnerID = this.board["12"];
+      this.gameInProgress = false;
+      if (winnerID === 1) {
+        this.score.player1Score ++;
+      } else if (winnerID === 2) {
+        this.score.player2Score ++;
+      }
     }
     if (this.board["13"] === this.board["23"] && this.board["23"] === this.board["33"]) {
-      return this.board["13"] + "wins";
+      const winnerID = this.board["13"];
+      this.gameInProgress = false;
+      if (winnerID === 1) {
+        this.score.player1Score ++;
+      } else if (winnerID === 2) {
+        this.score.player2Score ++;
+      }
     }
     if (this.board["11"] === this.board["22"] && this.board["22"] === this.board["33"]) {
-      return this.board["11"] + "wins";
+      const winnerID = this.board["11"];
+      this.gameInProgress = false;
+      if (winnerID === 1) {
+        this.score.player1Score ++;
+      } else if (winnerID === 2) {
+        this.score.player2Score ++;
+      }
     }
     if (this.board["13"] === this.board["22"] && this.board["22"] === this.board["31"]) {
-    return this.board["13"] + "wins";
+      const winnerID = this.board["13"];
+      this.gameInProgress = false;
+      if (winnerID === 1) {
+        this.score.player1Score ++;
+      } else if (winnerID === 2) {
+        this.score.player2Score ++;
+      }
      }
   },
-  update: function (spot, value) {
-    this.board[spot] = value;
-    return this.result();
+  update: function (tile, value) {
+    this.board[tile] = value;
+  },
+  gameOver: function () {
+    let playedTiles = 0;
+    for (let key in this.board) {
+      if (this.board[key].toString().length === 1) {
+        playedTiles ++;
+      }
+    }
+    if (playedTiles === 9) {
+      return "GAME OVER";
+    }
   },
 }
