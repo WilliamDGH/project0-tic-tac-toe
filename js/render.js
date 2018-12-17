@@ -7,7 +7,13 @@ const updateScore = function () {
 }
 const endMessage = function () {
   if (!tic.gameInProgress) {
-    $(`<p>The winner is ${tic.winner}.</p>`).appendTo("#message");
+    if (tic.winner === "player1") {
+      $("#winner-message").text(`The winner is player 1.`);
+    } else if (tic.winner === "draw") {
+      $("#winner-message").text(`It is a draw.`);
+    } else if (tic.winner === "player2") {
+      $("#winner-message").text(`The winner is player 2.`);
+    }
     $("#game-board").delay(1000).toggle(1000);
     $("#message").delay(1000).toggle(1000);
   }
