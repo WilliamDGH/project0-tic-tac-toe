@@ -52,4 +52,6 @@ $(document).ready(function () {
     tic.board = {11: 10, 12: 20, 13: 30, 21: 40, 22: 50, 23: 60, 31: 70, 32: 80, 33: 90};
     tic.gameInProgress = true;
   });
+
+  $("#sign-in").on("click", signIn);
 });
