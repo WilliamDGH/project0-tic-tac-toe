@@ -28,17 +28,20 @@ $(document).ready(function () {
     if ($(this).html().length === 0 && tic.gameInProgress) {
       const icon = $(player[0]);
       $(this).html(icon);
-      const tile = $(this).attr("id");
+      const tile = Number($(this).attr("id"));
       const value = player[1];
-      tic.update(tile, value);
-      tic.result();
+      tic.update(tile, value, tic.board);
+      tic.check(tic.board, player[1]);
       updateScore();
       endMessage();
-      if (player === player1) {
-        player = player2;
-      } else if (player === player2) {
-        player = player1;
-      }
+      // if (player === player1) {
+      //   player = player2;
+      // } else if (player === player2) {
+      //   player = player1;
+      // }
+      setTimeout(function () {
+        basicAI(tic.board);
+      }, 500);
   }
   });
 
@@ -49,7 +52,30 @@ $(document).ready(function () {
       $("#message").toggle("slow");
     }
     $(".column").html("");
-    tic.board = {11: 10, 12: 20, 13: 30, 21: 40, 22: 50, 23: 60, 31: 70, 32: 80, 33: 90};
+    tic.board = [10,20,30,
+                40,50,60,
+                70,80,90];
     tic.gameInProgress = true;
   });
 });
+
+
+function basicAI(board = tic.board) {
+  if(tic.gameInProgress) {
+    const icon = $(player2[0]);
+    const value = player2[1];
+    let move;
+    for (let i = 0; i < board.length; i++) {
+      if (board[i] !== 1 && board[i] !== 2) {
+        move = i;
+        break;
+      }
+    }
+    $(`#${move}`).html(icon);
+    tic.update(move, value, tic.board);
+    tic.check(tic.board, player2[1]);
+    updateScore();
+    endMessage();
+    return;
+  }
+}
