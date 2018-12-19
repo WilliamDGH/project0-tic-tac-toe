@@ -25,6 +25,9 @@ $(document).ready(function () {
   // play///////////////////////////////////////////////////
   let player = player1;
   $(".column").on("click", function () {
+    setTimeout(function () {
+      callMinimax(tic.board, 2);
+    }, 500);
     if ($(this).html().length === 0 && tic.gameInProgress) {
       const icon = $(player[0]);
       $(this).html(icon);
@@ -39,9 +42,7 @@ $(document).ready(function () {
       // } else if (player === player2) {
       //   player = player1;
       // }
-      setTimeout(function () {
-        basicAI(tic.board);
-      }, 500);
+
   }
   });
 
@@ -52,30 +53,7 @@ $(document).ready(function () {
       $("#message").toggle("slow");
     }
     $(".column").html("");
-    tic.board = [10,20,30,
-                40,50,60,
-                70,80,90];
+    tic.board = [0,1,2,3,4,5,6,7,8];
     tic.gameInProgress = true;
   });
 });
-
-
-function basicAI(board = tic.board) {
-  if(tic.gameInProgress) {
-    const icon = $(player2[0]);
-    const value = player2[1];
-    let move;
-    for (let i = 0; i < board.length; i++) {
-      if (board[i] !== 1 && board[i] !== 2) {
-        move = i;
-        break;
-      }
-    }
-    $(`#${move}`).html(icon);
-    tic.update(move, value, tic.board);
-    tic.check(tic.board, player2[1]);
-    updateScore();
-    endMessage();
-    return;
-  }
-}

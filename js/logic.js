@@ -1,8 +1,6 @@
 
 const tic = {
-  board: [10,20,30,
-          40,50,60,
-          70,80,90],
+  board: [0,1,2,3,4,5,6,7,8],
   winner: "",
   score: {
     player1Score: 0,
@@ -11,6 +9,7 @@ const tic = {
   },
   gameInProgress: true,
   result: function (board, player) {
+    player = player.toString();
     if (board[0] ===player && board[0] === board[1] && board[1] === board[2]) {
       return true;
     }
@@ -37,7 +36,7 @@ const tic = {
      }
     let playedTiles = 0;
     for (let i = 0; i < board.length; i++) {
-      if (board[i].toString().length === 1) {
+      if (typeof board[i] === "string") {
         playedTiles ++;
       }
     }
@@ -57,6 +56,6 @@ const tic = {
     }
   },
   update: function (tile, value, board) {
-    board[tile] = value;
+    board[tile] = value.toString();
   },
 }
