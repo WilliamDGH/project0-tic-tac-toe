@@ -5,7 +5,7 @@ const basicAI = function (board = tic.board) {
     const value = player2[1];
     let move;
     for (let i = 0; i < board.length; i++) {
-      if (board[i] !== 1 && board[i] !== 2) {
+      if (typeof board[i] !== "string") {
         move = i;
         break;
       }
