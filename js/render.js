@@ -1,34 +1,36 @@
-/* Open when someone clicks on the span element */
+// start of game variables
+let player1 = ['<i class="fas fa-cat fa-lg"></i>', 1];
+let player2 = ['<i class="fas fa-dog fa-lg"></i>', 2];
+let player = player1;
+let playingWithAdvancedAI = true;
+let playingWithBasicAI = false;
+let playingWithOtherPlayer = false;
+let humanHasPlayed = false;
+
+// toggle menu function
 const toggleMenu = function() {
   if ($("#gameManu").css("width") === "0px") {
     $("#gameManu").css("width", "100%");
   } else {
     $("#gameManu").css("width", "0px");
   }
-
 }
 
-/* Close when someone clicks on the "x" symbol inside the overlay */
-function closeNav() {
-  document.getElementById("myNav").style.width = "0%";
-}
-
-const player1 = ['<i class="fas fa-cat fa-lg"></i>', 1];
-const player2 = ['<i class="fas fa-dog fa-lg"></i>', 2];
-let playingWithAdvancedAI = true;
-let playingWithBasicAI = false;
-let playingWithOtherPlayer = false;
+// update scores in the backgorund
 const updateScore = function () {
   $("#player1-score").text(tic.score.player1Score);
   $("#draw-score").text(tic.score.drawScore);
   $("#player2-score").text(tic.score.player2Score);
 }
+
+// reset the scores to zero
 const zeroSocre = function () {
   tic.score.player1Score = 0;
   tic.score.drawScore = 0;
   tic.score.player2Score = 0;
 }
 
+// reset the game info in the background
 const resetBoard = function () {
   $("#message").css("width", "0px");
   $(".column").html("");
@@ -36,6 +38,7 @@ const resetBoard = function () {
   tic.gameInProgress = true;
 }
 
+// show end of game messages
 const endMessage = function () {
   if (!tic.gameInProgress) {
     if (tic.winner === "player1") {
@@ -45,27 +48,29 @@ const endMessage = function () {
     } else if (tic.winner === "player2") {
       $("#winner-message").text(`The winner is ${$("#player2-label").text()}.`);
     }
-    $("#message").css("width", "100%");
+    setTimeout(function () {
+      $("#message").css("width", "100%");
+    }, 1000);
   }
 }
 
 
+// MAIN RENDER FUNCTION EVENT LISTENER
 $(document).ready(function () {
   updateScore();
   // play///////////////////////////////////////////////////
-  let player = player1;
-  // advanced AI play
+  // AI play
   $(".column").on("click", function () {
     setTimeout(function () {
-      if (playingWithAdvancedAI) {
+      if (playingWithAdvancedAI && humanHasPlayed) {
         callMinimax(tic.board, 2);
       }
-      if (playingWithBasicAI) {
+      if (playingWithBasicAI && humanHasPlayed) {
         basicAI(tic.board);
       }
     }, 500);
     // human player move render
-    if ($(this).html().length === 0 && tic.gameInProgress) {
+    if ($(this).html().length === 0 && tic.gameInProgress && !humanHasPlayed) {
       const icon = $(player[0]);
       $(this).html(icon);
       const tile = Number($(this).attr("id"));
@@ -74,6 +79,9 @@ $(document).ready(function () {
       tic.check(tic.board, player[1]);
       updateScore();
       endMessage();
+      if (playingWithBasicAI || playingWithAdvancedAI) {
+        humanHasPlayed = true;
+      }
       // need to switch between players when PVP
       if (playingWithOtherPlayer && tic.gameInProgress) {
         if (player === player1) {
@@ -133,6 +141,30 @@ $(document).ready(function () {
     toggleMenu();
   })
   $("#closebtn").on("click", function () {
+    toggleMenu();
+  })
+  // change tokens
+  $("#rfc-bfc").on("click", function () {
+    player1 = ['<img src="pic/real-madrid.svg" alt="real madrid">', 1];
+    player2 = ['<img src="pic/barcelona.svg" alt="barcelona">', 2];
+    player = player1;
+    resetBoard();
+    toggleMenu();
+  })
+
+  $("#apple-google").on("click", function () {
+    player1 = ['<img src="pic/apple.png" alt="apple">', 1];
+    player2 = ['<img src="pic/google.png" alt="google">', 2];
+    player = player1;
+    resetBoard();
+    toggleMenu();
+  })
+
+  $("#mac-windows").on("click", function () {
+    player1 = ['<img src="pic/windows.png" alt="windows">', 1];
+    player2 = ['<img src="pic/mac.png" alt="mac">', 2];
+    player = player1;
+    resetBoard();
     toggleMenu();
   })
 });

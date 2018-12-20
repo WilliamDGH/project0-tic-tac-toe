@@ -45,6 +45,26 @@ body {
   color: #aaa;
 }
 
+#icons p {
+  color: #ddd;
+  font-size: 20px;
+}
+
+#icons img {
+  width: 180px;
+}
+
+#icons div {
+  width: 365px;
+  margin: 0 auto;
+}
+
+#icons div:hover {
+  border: 1px solid #666;
+  border-radius: 0.5em;
+  background-color: #333;
+}
+
 header {
   width: 600px;
   margin: 0 auto;
@@ -116,9 +136,22 @@ h1 {
   border-radius: 0.25em;
   cursor: pointer;
 }
+
+.aiPlayBoxShadow {
+  box-shadow: 0px 0px 21px 5px rgba(0,0,0,0.75);
+}
+
+.column:hover {
+  box-shadow: 0px 0px 21px 5px rgba(0,0,0,0.75);
+}
+
 .fa-cat, .fa-dog {
     display:inline-block;
     line-height: 200px;
+}
+
+.column img {
+  width: 180px;
 }
 
 .fa-cat {
@@ -200,9 +233,22 @@ h1 {
     left: 5%;
   }
 
+  #icons img {
+    width: 167px;
+  }
+
+  #icons div {
+    width: 340px;
+    margin: 0 auto;
+  }
+
   .fa-cat, .fa-dog {
       display:inline-block;
       line-height: 175px;
+  }
+
+  .column img {
+    width: 167px;
   }
 
   #buttons {
@@ -249,10 +295,23 @@ h1 {
     left: 17.5%;
   }
 
+  #icons img {
+    width: 105px;
+  }
+
+  #icons div {
+    width: 215px;
+    margin: 0 auto;
+  }
+
   .fa-cat, .fa-dog {
       display:inline-block;
       line-height: 117px;
       font-size: 50px;
+  }
+
+  .column img {
+    width: 105px;
   }
 
   #buttons {

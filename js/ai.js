@@ -1,8 +1,20 @@
+const aiPlay = function (move, icon) {
+  $(`#${move}`).addClass("aiPlayBoxShadow");
+  $(`#${move}`).html(icon);
+  setTimeout(function () {
+    $(`#${move}`).removeClass("aiPlayBoxShadow");
+  }, 300);
+  tic.update(move, 2, tic.board);
+  tic.check(tic.board, player2[1]);
+  updateScore();
+  endMessage();
+  humanHasPlayed = false;
+}
+
 // Basic AI.................................
 const basicAI = function (board = tic.board) {
   if(tic.gameInProgress) {
     const icon = $(player2[0]);
-    const value = player2[1];
     let move;
     for (let i = 0; i < board.length; i++) {
       if (typeof board[i] !== "string") {
@@ -10,11 +22,7 @@ const basicAI = function (board = tic.board) {
         break;
       }
     }
-    $(`#${move}`).html(icon);
-    tic.update(move, value, tic.board);
-    tic.check(tic.board, player2[1]);
-    updateScore();
-    endMessage();
+    aiPlay(move, icon);
     return;
   }
 }
@@ -79,12 +87,8 @@ const minimax = function (board, player) {
 const callMinimax = function () {
   if (tic.gameInProgress) {
     const icon = $(player2[0]);
-    const aiMove = minimax(tic.board, 2).index;
-    $(`#${aiMove}`).html(icon);
-    tic.update(aiMove, 2, tic.board);
-    tic.check(tic.board, player2[1]);
-    updateScore();
-    endMessage();
+    const move = minimax(tic.board, 2).index;
+    aiPlay(move, icon);
     return;
   }
 }
