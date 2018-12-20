@@ -36,6 +36,7 @@ const resetBoard = function () {
   $(".column").html("");
   tic.board = [0,1,2,3,4,5,6,7,8];
   tic.gameInProgress = true;
+  humanHasPlayed = false;
 }
 
 // show end of game messages
