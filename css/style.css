@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  background-color: #ffe6c9;
 }
 
 .container {
@@ -7,21 +7,80 @@ body {
   margin: 0 auto;
 }
 
-h1 {
-  color: white;
-  text-align: center;
-  font-size: 80px;
-  margin: 20px auto 0 auto;
+/* The Overlay (background) */
+.overlay {
+  /* Height & width depends on how you want to reveal the overlay (see JS below) */
+  height: 100%;
+  width: 0;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+/* Position the content inside the overlay */
+.overlay-content {
+  position: relative;
+  top: 25%; /* 25% from the top */
+  width: 100%; /* 100% width */
+  text-align: center; /* Centered text/links */
+  margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+}
+
+
+/* When you mouse over the navigation links, change their color */
+#closebtn:hover, #closebtn:focus, #open:hover, #open:focus {
+  color: #f1f1f1;
+}
+
+/* Position the close button (top right corner) */
+#closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  color: #aaa;
 }
 
 header {
+  width: 600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  color: #666;
+  text-align: left;
+  font-size: 60px;
+  margin: 10px 0 0 0;
+}
+
+#open {
+  align-self: center;
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block; /* Display block instead of inline */
+  transition: 0.3s; /* Transition effects on hover (color) */
+}
+
+#game-info {
   margin: 10px auto 0 auto;
   width: 80%;
   max-width: 600px;
   display: flex;
   justify-content: space-between;
-  color: white;
+  color: #666;
   font-size: 20px;
+}
+
+#game-info p {
+  font-size: 1em;
 }
 
 #player1-score, #draw-score, #player2-score {
@@ -84,27 +143,20 @@ header {
   font-size: 20px;
 }
 
-#playWithAdvancedAI {
-  display: none;
-}
-
-#reset {
+.reset {
+  display: block;
   width: 200px;
   height: 50px;
   border-radius: 0.5em;
   font-size: 25px;
   background-color: #fcc888;
   margin: 20px auto;
-  margin: 0 30px 0 30px;
 }
 
 #message {
-  margin: 20px auto;
-  width: 600px;
-  height: 600px;
-  background-color: #f4a142;
-  display: none;
-  border-radius: 1em;
+  /* background-color: rgba(244, 161, 66, 0.8); */
+  background-color: rgba(0,0,0, 0.9);
+  /* width: 100%; */
 }
 
 #message > p {
@@ -112,14 +164,25 @@ header {
   font-size: 45px;
   line-height: 150px;
   margin: 0;
+  color: #fcc888;
 }
 
-@media screen and (max-width: 800px) {
-  h1 {
-    font-size: 70px;
+#overlayReset {
+  position: absolute;
+  bottom: 100px;
+  left: calc(50% - 100px);
+}
+
+@media screen and (max-width: 750px) {
+  header {
+    width: 500px;
   }
 
-  header {
+  h1 {
+    font-size: 50px;
+  }
+
+  #game-info {
     max-width: 500px;
   }
 
@@ -128,14 +191,13 @@ header {
     height: 500px;
   }
 
-  #message {
-    width: 500px;
-    height: 500px;
-  }
-
   #message > p {
     font-size: 40px;
     line-height: 125px;
+  }
+
+  #overlayReset {
+    left: 5%;
   }
 
   .fa-cat, .fa-dog {
@@ -149,7 +211,7 @@ header {
     align-items: center;
   }
 
-  #buttons button {
+  #buttons button, .reset {
     width: 90%;
     margin-bottom: 10px;
   }
@@ -161,11 +223,15 @@ header {
     margin: 0 auto;
   }
 
-  h1 {
-    font-size: 60px;
+  header {
+    width: 350px;
   }
 
-  header {
+  h1 {
+    font-size: 40px;
+  }
+
+  #game-info {
     max-width: 350px;
   }
 
@@ -174,14 +240,13 @@ header {
     height: 350px;
   }
 
-  #message {
-    width: 350px;
-    height: 350px;
-  }
-
   #message > p {
     font-size: 30px;
     line-height: 88px;
+  }
+
+  #overlayReset {
+    left: 17.5%;
   }
 
   .fa-cat, .fa-dog {
@@ -196,8 +261,8 @@ header {
     align-items: center;
   }
 
-  #buttons button {
-    width: 60%;
+  #buttons button, .reset {
+    width: 65%;
     margin-bottom: 10px;
   }
 }

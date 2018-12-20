@@ -1,3 +1,18 @@
+/* Open when someone clicks on the span element */
+const toggleMenu = function() {
+  if ($("#gameManu").css("width") === "0px") {
+    $("#gameManu").css("width", "100%");
+  } else {
+    $("#gameManu").css("width", "0px");
+  }
+
+}
+
+/* Close when someone clicks on the "x" symbol inside the overlay */
+function closeNav() {
+  document.getElementById("myNav").style.width = "0%";
+}
+
 const player1 = ['<i class="fas fa-cat fa-lg"></i>', 1];
 const player2 = ['<i class="fas fa-dog fa-lg"></i>', 2];
 let playingWithAdvancedAI = true;
@@ -15,10 +30,7 @@ const zeroSocre = function () {
 }
 
 const resetBoard = function () {
-  if (!tic.gameInProgress) {
-    $("#game-board").toggle("slow");
-    $("#message").toggle("slow");
-  }
+  $("#message").css("width", "0px");
   $(".column").html("");
   tic.board = [0,1,2,3,4,5,6,7,8];
   tic.gameInProgress = true;
@@ -27,14 +39,13 @@ const resetBoard = function () {
 const endMessage = function () {
   if (!tic.gameInProgress) {
     if (tic.winner === "player1") {
-      $("#winner-message").text(`The winner is player 1.`);
+      $("#winner-message").text(`The winner is ${$("#player1-label").text()}.`);
     } else if (tic.winner === "draw") {
       $("#winner-message").text(`It is a draw.`);
     } else if (tic.winner === "player2") {
-      $("#winner-message").text(`The winner is player 2.`);
+      $("#winner-message").text(`The winner is ${$("#player2-label").text()}.`);
     }
-    $("#game-board").delay(1000).toggle(1000);
-    $("#message").delay(1000).toggle(1000);
+    $("#message").css("width", "100%");
   }
 }
 
@@ -64,7 +75,7 @@ $(document).ready(function () {
       updateScore();
       endMessage();
       // need to switch between players when PVP
-      if (playingWithOtherPlayer) {
+      if (playingWithOtherPlayer && tic.gameInProgress) {
         if (player === player1) {
           player = player2;
         } else if (player === player2) {
@@ -76,7 +87,7 @@ $(document).ready(function () {
 
   // reset game borad ////////////////////////////////////////
   // restart the game
-  $("#reset").on("click", function () {
+  $(".reset").on("click", function () {
     resetBoard();
   });
 
@@ -85,36 +96,43 @@ $(document).ready(function () {
      playingWithAdvancedAI = false;
      playingWithBasicAI = false;
      playingWithOtherPlayer = true;
-     $("#player1-label").text("Player 1: ");
-     $("#player2-label").text("Player 2: ");
+     $("#player1-label").text("Player 1");
+     $("#player2-label").text("Player 2");
      zeroSocre();
      updateScore();
      resetBoard();
+     toggleMenu();
   })
   // change to play with basic ai
   $("#playWithBasicAI").on("click", function () {
      playingWithAdvancedAI = false;
      playingWithBasicAI = true;
      playingWithOtherPlayer = false;
-     $("#player1-label").text("You: ");
-     $("#player2-label").text("Basic AI: ");
-     $("#playWithAdvancedAI").toggle();
-     $("#playWithBasicAI").toggle();
+     $("#player1-label").text("You");
+     $("#player2-label").text("Basic AI");
      zeroSocre();
      updateScore();
      resetBoard();
+     toggleMenu();
   })
   // change to play with advanced ai
   $("#playWithAdvancedAI").on("click", function () {
      playingWithAdvancedAI = true;
      playingWithBasicAI = false;
      playingWithOtherPlayer = false;
-     $("#player1-label").text("You: ");
-     $("#player2-label").text("Crazy AI: ");
-     $("#playWithAdvancedAI").toggle();
-     $("#playWithBasicAI").toggle();
+     $("#player1-label").text("You");
+     $("#player2-label").text("Crazy AI");
      zeroSocre();
      updateScore();
      resetBoard();
+     toggleMenu();
+  })
+
+  // toggle fullscreen menu
+  $("#open").on("click", function () {
+    toggleMenu();
+  })
+  $("#closebtn").on("click", function () {
+    toggleMenu();
   })
 });
